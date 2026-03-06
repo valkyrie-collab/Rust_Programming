@@ -1,0 +1,1 @@
+/home/valkyrie/Documents/Programming/RustProgramming/floating_point_operation/target/debug/floating_point_operation: /home/valkyrie/Documents/Programming/RustProgramming/floating_point_operation/src/main.rs
