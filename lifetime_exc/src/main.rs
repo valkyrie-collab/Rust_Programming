@@ -1,3 +1,7 @@
+struct ImportantExpert<'a> {
+    part: &'a str
+}
+
 fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
 
     if x.len() > y.len() {
@@ -29,4 +33,8 @@ fn main() {
     }
 
     // println!("The longest string {}", result);
+
+    let novel: String = String::from("Call me Ishmael. Some years ago...");
+    let first: &str = novel.split('.').next().expect("cannot find .");
+    let i: ImportantExpert = ImportantExpert { part: &novel };
 }

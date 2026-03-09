@@ -1,0 +1,1 @@
+/home/valkyrie/Documents/Programming/RustProgramming/minigrep/target/debug/minigrep: /home/valkyrie/Documents/Programming/RustProgramming/minigrep/src/lib.rs /home/valkyrie/Documents/Programming/RustProgramming/minigrep/src/main.rs
