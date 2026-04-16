@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e01c760b-2017-4e5c-88c3-de570f12ca82" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Freq_count/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Freq_count/.idea/Freq_count.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Freq_count/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Freq_count/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Freq_count/task.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../anagram_string/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../anagram_string/.idea/anagram_string.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../anagram_string/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../anagram_string/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat_between_two_client/src/bin/client.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat_between_two_client_three/Readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat_between_two_client_three/src/bin/client.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat_between_two_client_three/src/client_handler.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat_between_two_client_three/src/lib.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat_between_two_client_three/src/threadpool/fnbox.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat_between_two_client_three/src/threadpool/mod.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat_between_two_client_three/src/threadpool/worker.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat_between_two_client_two/Readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat_between_two_client_two/src/bin/client.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cli_task_manager/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cli_task_manager/.idea/cli_task_manager.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cli_task_manager/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cli_task_manager/log.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cli_task_manager_two/.idea/cli_task_manager_two.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../leaf_binary_tree/.idea/leaf_binary_tree.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../merge_sort_with_struct/.idea/merge_sort_with_struct.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../multithread_application_three/.idea/multithread_application_three.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../multithread_application_three/src/lib.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zig_zag/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zig_zag/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zig_zag/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zig_zag/.idea/zig_zag.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../area_using_struct/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../area_using_struct/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../array_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../array_project/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../avl_tree/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../avl_tree/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bfs/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../bfs/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../binary_avl_tree/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../binary_avl_tree/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../binary_search_improved/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../binary_search_improved/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../binary_tree_two/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../binary_tree_two/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../boolean_value/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../boolean_value/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../box_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../box_project/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../character_datatype/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../character_datatype/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../circular_queue/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../circular_queue/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../closures_projecat_two/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../closures_projecat_two/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../closures_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../closures_project/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../complex_cal/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../complex_cal/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../control_flow/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../control_flow/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../deadlock/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../deadlock/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../depth_of_binary_tree/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../depth_of_binary_tree/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dfs/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../dfs/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dfs/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../dfs/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dijktrs_algorithm/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../dijktrs_algorithm/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../double_linked_list_project_two/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../double_linked_list_project_two/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../double_linked_list_using_package_manager/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../double_linked_list_using_package_manager/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../double_linkedlist_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../double_linkedlist_project/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../enum_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../enum_project/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../error_handling/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../error_handling/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fah_and_cel/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../fah_and_cel/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fibonacci_series/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../fibonacci_series/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../file_system/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../file_system/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../floating_point_operation/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../floating_point_operation/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front_back_list/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../front_back_list/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../function_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../function_project/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generic_data_exc/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../generic_data_exc/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../generic_data_two_exc/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../generic_data_two_exc/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../guessing_game_four/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../guessing_game_four/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../guessing_game_three/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../guessing_game_three/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hash_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../hash_project/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hello/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../hello/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../library_massenger/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../library_massenger/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lifetime_exc/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lifetime_exc/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../linked_list_project_three/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../linked_list_project_three/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../linked_list_project_two/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../linked_list_project_two/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../linked_list_using_package_manager/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../linked_list_using_package_manager/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../linkedlist_four/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../linkedlist_four/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../linkedlist_generic/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../linkedlist_generic/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../linkedlist_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../linkedlist_project/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../looping_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../looping_project/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../merge_sort/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../merge_sort/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minigrep/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../minigrep/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minigrep_two/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../minigrep_two/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mod_filesystem/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../mod_filesystem/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mod_filesystem_two/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../mod_filesystem_two/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mutability_and_immutability/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../mutability_and_immutability/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../outmost_mode_filesystem/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../outmost_mode_filesystem/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ownership_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ownership_project/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pig_latin_exc/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../pig_latin_exc/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../polish_cal/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../polish_cal/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shadowing/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../shadowing/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../single_thread_application/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../single_thread_application/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../single_thread_application/target/flycheck0/stderr" beforeDir="false" afterPath="$PROJECT_DIR$/../single_thread_application/target/flycheck0/stderr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../single_thread_application/target/flycheck0/stdout" beforeDir="false" afterPath="$PROJECT_DIR$/../single_thread_application/target/flycheck0/stdout" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../smaller_number_in_array/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../smaller_number_in_array/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../string_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../string_project/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../struct_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../struct_project/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../thread_mutex_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../thread_mutex_project/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../thread_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../thread_project/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../traits_exc/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../traits_exc/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tuple_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../tuple_project/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../twelve_days_christmas/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../twelve_days_christmas/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unsafe_rust/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../unsafe_rust/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vec_hashmap_staff_dept/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../vec_hashmap_staff_dept/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vector_exercise/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../vector_exercise/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vector_project/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/../vector_project/target/.rustc_info.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="3BqXryXXDGOVnGUJlRS30OYAkrX" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.rust.reset.selective.auto.import": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "new__main",
+    "last_opened_file_path": "/home/rajarshi/Documents/Programming/RustProgramming/binary_tree",
+    "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
+    "org.rust.first.attach.projects": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e01c760b-2017-4e5c-88c3-de570f12ca82" name="Changes" comment="" />
+      <created>1775217778163</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1775217778163</updated>
+      <workItem from="1775217779728" duration="31000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

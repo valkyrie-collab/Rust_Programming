@@ -1,0 +1,1 @@
+/home/valkyrie/Documents/Programming/RustProgramming/multithread_application/target/debug/multithread_application: /home/valkyrie/Documents/Programming/RustProgramming/multithread_application/src/main.rs

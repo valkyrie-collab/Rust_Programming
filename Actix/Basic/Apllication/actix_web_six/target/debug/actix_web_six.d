@@ -1,0 +1,1 @@
+/home/rajarshi/Documents/Programming/RustProgramming/Actix/Basic/Apllication/actix_web_six/target/debug/actix_web_six: /home/rajarshi/Documents/Programming/RustProgramming/Actix/Basic/Apllication/actix_web_six/src/main.rs

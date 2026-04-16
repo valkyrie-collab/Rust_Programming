@@ -1,0 +1,8 @@
+[package]
+name = "actix_web_path_openssl_one"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+actix-web = {version = "4", features = ["openssl"]}
+openssl = {version = "0.10"}

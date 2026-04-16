@@ -1,0 +1,1 @@
+/home/valkyrie/Documents/Programming/RustProgramming/double_linkedlist_project/target/debug/double_linkedlist_project: /home/valkyrie/Documents/Programming/RustProgramming/double_linkedlist_project/src/main.rs

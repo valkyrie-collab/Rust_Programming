@@ -1,0 +1,2 @@
+fn(std::option::Option<Form<Info>>) -> impl std::future::Future<Output = impl Responder> {index}
+fn(std::option::Option<Form<Info>>) -> impl std::future::Future<Output = impl Responder> {index}: HttpServiceFactory

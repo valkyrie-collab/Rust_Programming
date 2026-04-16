@@ -1,0 +1,1 @@
+/home/valkyrie/Documents/Programming/RustProgramming/single_thread_application/target/debug/single_thread_application: /home/valkyrie/Documents/Programming/RustProgramming/single_thread_application/src/main.rs

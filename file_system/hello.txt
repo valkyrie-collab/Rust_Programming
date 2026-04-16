@@ -1,0 +1,1 @@
+Hello world this rust a new memory safety language

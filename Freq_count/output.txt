@@ -1,0 +1,2 @@
+[ Word:world | Frequency:1 | Height:1 ] ->  [ Word:this | Frequency:1 | Height:2 ] ->  [ Word:rust | Frequency:1 | Height:3 ] ->  [ Word:is | Frequency:1 | Height:4 ] ->  [ Word:Rust | Frequency:1 | Height:2 ] ->  [ Word:hello | Frequency:2 | Height:1 ] ->
+[ Word:world | Frequency:1 | Height:4 ] ->  [ Word:this | Frequency:1 | Height:2 ] ->  [ Word:is | Frequency:1 | Height:1 ] ->  [ Word:rust | Frequency:2 | Height:3 ] ->  [ Word:hello | Frequency:2 | Height:5 ] ->

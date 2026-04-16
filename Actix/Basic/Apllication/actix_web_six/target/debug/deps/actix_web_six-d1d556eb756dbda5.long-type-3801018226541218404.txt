@@ -1,0 +1,2 @@
+fn() -> HttpResponseBuilder {actix_web::response::http_codes::<impl HttpResponse>::MethodNotAllowed}
+fn() -> HttpResponseBuilder {actix_web::response::http_codes::<impl HttpResponse>::MethodNotAllowed}: Responder

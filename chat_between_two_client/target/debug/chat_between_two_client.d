@@ -1,0 +1,1 @@
+/home/valkyrie/Documents/Programming/RustProgramming/chat_between_two_client/target/debug/chat_between_two_client: /home/valkyrie/Documents/Programming/RustProgramming/chat_between_two_client/src/main.rs

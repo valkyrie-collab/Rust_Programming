@@ -1,0 +1,573 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                    THREADPOOL VISUAL ARCHITECTURE GUIDE                       ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════════════════════
+THE BIG PICTURE
+═══════════════════════════════════════════════════════════════════════════════
+
+What we're building:
+    
+    ┌─────────────────────────────────────────────────────────────┐
+    │                    ThreadPool                               │
+    │  ┌──────────────────────────────────────────────────────┐   │
+    │  │           WORKER THREAD MANAGEMENT                   │   │
+    │  │                                                      │   │
+    │  │  [Worker 0]  [Worker 1]  [Worker 2]  [Worker 3]     │   │
+    │  │     ↑           ↑           ↑           ↑           │   │
+    │  │     └───────────┴───────────┴───────────┘           │   │
+    │  │                    │                                │   │
+    │  │              SHARED RECEIVER                         │   │
+    │  │            (Listen on channel)                       │   │
+    │  │                    │                                │   │
+    │  └────────────────────┼────────────────────────────────┘   │
+    │                       ↑                                    │
+    │                    SENDER                                 │
+    │                 (Send jobs here)                          │
+    └─────────────────────────────────────────────────────────────┘
+            ↑
+        Main Thread sends jobs
+
+Purpose:
+    ├─ Create workers ONCE (not per request)
+    ├─ Reuse them for multiple jobs
+    └─ Gracefully shut them down
+
+
+═══════════════════════════════════════════════════════════════════════════════
+PART 1: IMPORTS & ENUMS - SETUP
+═══════════════════════════════════════════════════════════════════════════════
+
+    use std::thread;           ← Need to spawn threads
+    use std::sync::mpsc;       ← Need channel communication
+    use std::sync::{Arc, Mutex};  ← Need shared ownership + locking
+
+
+    enum Message {
+        NewJob(Job),      ← "Here's a job to do!"
+        Terminate         ← "Stop and exit!"
+    }
+
+
+═══════════════════════════════════════════════════════════════════════════════
+PART 2: FNBOX - THE MAGIC TRICK
+═══════════════════════════════════════════════════════════════════════════════
+
+Problem: We need to store functions in a Box, but functions are weird types
+
+Solution: FnBox trait
+
+    trait FnBox {
+        fn call_box(self: Box<Self>);
+    }
+
+What it does:
+    
+    box_of_function.call_box()
+            │
+            ├─ Unpacks the function from the box
+            └─ Calls it!
+
+
+Why?
+    
+    Normal functions:
+        box_fn()  ❌ Won't work!
+
+    With FnBox trait:
+        box_fn.call_box()  ✅ Works!
+
+
+Implementation:
+
+    impl<F: FnOnce()> FnBox for F {
+        fn call_box(self: Box<F>) {
+            (*self)()
+        }
+    }
+
+Translation:
+    "For any function F that can be called once,
+     let it implement FnBox by unpacking and calling itself"
+
+
+═══════════════════════════════════════════════════════════════════════════════
+PART 3: JOB TYPE - WHAT ARE WE SENDING?
+═══════════════════════════════════════════════════════════════════════════════
+
+    type Job = Box<dyn FnBox + Send + 'static>;
+
+Breakdown:
+
+    Box<...>
+    ├─ Stored on heap
+    └─ Size unknown at compile time
+
+
+    dyn FnBox
+    ├─ Could be any type that implements FnBox
+    └─ We don't know which one until runtime
+
+
+    Send
+    ├─ Safe to send between threads
+    └─ No non-thread-safe types used
+
+
+    'static
+    ├─ Lives for the entire program
+    └─ Doesn't reference temporary data
+
+
+Visualization:
+
+    A Job is a package:
+    
+    ┌─────────────────────────────┐
+    │ BOX (Heap allocated)        │
+    │ ┌───────────────────────┐   │
+    │ │ FnBox + Send + static │   │
+    │ │ (Some function)       │   │
+    │ └───────────────────────┘   │
+    └─────────────────────────────┘
+            ↓
+    Send to worker thread
+
+
+═══════════════════════════════════════════════════════════════════════════════
+PART 4: WORKER STRUCT & THREAD SPAWN
+═══════════════════════════════════════════════════════════════════════════════
+
+Worker Struct:
+
+    struct Worker {
+        id: usize,
+        thread: Option<JoinHandle<()>>
+    }
+
+What is each field?
+
+    id: usize
+    └─ Worker's number (0, 1, 2, 3)
+
+
+    thread: Option<JoinHandle<()>>
+    ├─ Some(JoinHandle) = Thread is running
+    └─ None = Thread was taken out (for shutdown)
+
+
+The Worker's Loop:
+
+    When we create Worker #0:
+
+    ┌─────────────────────────────────────────────────┐
+    │ Worker 0 (Runs in its own thread)               │
+    │                                                 │
+    │ loop {                                          │
+    │   ┌─────────────────────────────────────────┐   │
+    │   │ WAIT for message                        │   │
+    │   │ (blocking here until message arrives)   │   │
+    │   └─────────────────────────────────────────┘   │
+    │            │ GOT MESSAGE!                        │
+    │            ↓                                      │
+    │   ┌─────────────────────────────────────────┐   │
+    │   │ Match on message:                       │   │
+    │   │                                         │   │
+    │   │ NewJob(job) → Execute job              │   │
+    │   │ Terminate   → break (exit loop)        │   │
+    │   └─────────────────────────────────────────┘   │
+    │            │                                     │
+    │            └─ Loop back to WAIT                 │
+    │ }                                               │
+    └─────────────────────────────────────────────────┘
+            │
+            └─ When Terminate arrives, exits and thread ends
+
+
+═══════════════════════════════════════════════════════════════════════════════
+PART 5: THREADPOOL::NEW - BUILDING THE POOL
+═══════════════════════════════════════════════════════════════════════════════
+
+Step 1: Assert size > 0
+
+    assert!(size > 0);
+    └─ Can't have 0 workers!
+
+
+Step 2: Create channel
+
+    let (sender, receiver) = mpsc::channel();
+
+    Visualization:
+
+    sender  ═══════════════  receiver
+    (you)     (channel)     (workers)
+
+    sender sends jobs →
+    ← receiver receives jobs
+
+
+Step 3: Wrap receiver in Arc + Mutex
+
+    let receiver = Arc::new(Mutex::new(receiver));
+
+    Why Arc<Mutex<...>>?
+
+    ┌─────────────────────────────────┐
+    │ Arc<Mutex<Receiver>>            │
+    │ (Atomic Reference Counter)      │
+    │ (Mutual Exclusion Lock)         │
+    │                                 │
+    │ ┌─────────────────────────────┐ │
+    │ │ Receiver (ONE copy of data) │ │
+    │ └─────────────────────────────┘ │
+    │ ↑ ↑ ↑ ↑                         │
+    │ │ │ │ └─ Worker 3's pointer    │
+    │ │ │ └─── Worker 2's pointer    │
+    │ │ └───── Worker 1's pointer    │
+    │ └─────── Worker 0's pointer    │
+    └─────────────────────────────────┘
+
+    Arc = All workers point to SAME receiver
+    Mutex = Only one worker reads at a time
+
+
+Step 4: Create workers
+
+    for id in 0..size {
+        workers.push(Worker::new(id, Arc::clone(&receiver)));
+    }
+
+    Visualization:
+
+    Loop creates:
+
+    Worker::new(0, Arc::clone(&receiver))
+           │         │
+           ├─ id = 0 └─ Pointer to shared receiver
+           └─ Spawns thread #0
+
+    Worker::new(1, Arc::clone(&receiver))
+           │         │
+           ├─ id = 1 └─ Pointer to shared receiver
+           └─ Spawns thread #1
+
+    ... (repeat for workers 2 and 3)
+
+    Result:
+
+    ┌───────────────┬───────────────┬───────────────┬───────────────┐
+    │   Worker 0    │   Worker 1    │   Worker 2    │   Worker 3    │
+    ├───────────────┼───────────────┼───────────────┼───────────────┤
+    │ id: 0         │ id: 1         │ id: 2         │ id: 3         │
+    │ thread: H0    │ thread: H1    │ thread: H2    │ thread: H3    │
+    └───────────────┴───────────────┴───────────────┴───────────────┘
+            ↓ ↓ ↓ ↓
+            └─┼─┼─┼───────────┐
+              └─┼─┼───────┐   │
+                └─┼───┐   │   │
+                  └───┼───┼───┼─→ Arc<Mutex<Receiver>>
+                      │   │   │
+                  (All point to SAME receiver)
+
+
+Step 5: Return ThreadPool
+
+    ThreadPool { workers, sender }
+
+    Final structure:
+
+    ┌──────────────────────────────────┐
+    │ ThreadPool                       │
+    │ ┌──────────────────────────────┐ │
+    │ │ workers: [W0, W1, W2, W3]    │ │
+    │ │                              │ │
+    │ │ W0 →─┐                       │ │
+    │ │ W1 →─┼─→ receiver            │ │
+    │ │ W2 →─┤   (listening)         │ │
+    │ │ W3 →─┘                       │ │
+    │ └──────────────────────────────┘ │
+    │ ┌──────────────────────────────┐ │
+    │ │ sender: Sender<Message>      │ │
+    │ │ (sends jobs to receiver)     │ │
+    │ └──────────────────────────────┘ │
+    └──────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════
+PART 6: THREADPOOL::EXECUTE - SENDING A JOB
+═══════════════════════════════════════════════════════════════════════════════
+
+You call:
+
+    pool.execute(|| println!("Hello!"));
+
+Inside execute:
+
+    pub fn execute<F>(&self, f: F) {
+        let job = Box::new(f);  ← Box your function
+        self.sender.send(Message::NewJob(job)).unwrap();  ← Send it!
+    }
+
+Visualization:
+
+    Main Thread                          Worker Threads
+    ┌────────────────────────┐          ┌──────────────────┐
+    │ pool.execute(         │          │ Worker 0         │
+    │   || println!("Hi")   │          │ (listening)      │
+    │ )                     │          │                  │
+    │                       │          │ Worker 1         │
+    │ ↓                     │          │ (listening)      │
+    │ Box the function      │          │                  │
+    │ ↓                     │          │ Worker 2         │
+    │ sender.send(          │          │ (listening)      │
+    │  Message::NewJob(...) │ ────────→ Receiver          │
+    │ )                     │          │ ↓ (picks it up)  │
+    └────────────────────────┘         │                  │
+                                        │ Worker 3         │
+                                        │ (listening)      │
+                                        │                  │
+                                        └──────────────────┘
+
+    One of the listening workers gets the message!
+
+    That worker:
+    ├─ Matches Message::NewJob(job)
+    ├─ Calls job.call_box()
+    └─ Function executes!
+
+
+Multiple Jobs:
+
+    pool.execute(job1);  → Worker 0 takes it
+    pool.execute(job2);  → Worker 1 takes it
+    pool.execute(job3);  → Worker 2 takes it
+    pool.execute(job4);  → Worker 3 takes it
+    pool.execute(job5);  → Waits for Worker 0 to finish
+                           Then Worker 0 takes it
+    pool.execute(job6);  → Waits for next available worker
+
+
+═══════════════════════════════════════════════════════════════════════════════
+PART 7: DROP - GRACEFUL SHUTDOWN
+═══════════════════════════════════════════════════════════════════════════════
+
+When pool goes out of scope:
+
+    fn main() {
+        let pool = ThreadPool::new(4);
+        pool.execute(job1);
+        pool.execute(job2);
+    }  ← pool goes out of scope here!
+       └─ drop() is called
+
+
+drop() does two things:
+
+PHASE 1: Send Terminate Messages
+─────────────────────────────────
+
+    for _ in &self.workers {
+        self.sender.send(Message::Terminate).unwrap()
+    }
+
+    Visualization:
+
+    Main Thread                          Receiver
+    ┌────────────────────────┐          ┌──────────────┐
+    │ sender.send(Terminate) │ ────────→ │ Queue:       │
+    │ sender.send(Terminate) │ ────────→ │ Terminate    │
+    │ sender.send(Terminate) │ ────────→ │ Terminate    │
+    │ sender.send(Terminate) │ ────────→ │ Terminate    │
+    └────────────────────────┘          │ Terminate    │
+                                        └──────────────┘
+                                                ↓
+                                        Worker 0 ← recv()
+                                        Worker 1 ← recv()
+                                        Worker 2 ← recv()
+                                        Worker 3 ← recv()
+
+
+PHASE 2: Wait for All Workers
+──────────────────────────────
+
+    for worker in &mut self.workers {
+        if let Some(thread) = worker.thread.take() {
+            thread.join().unwrap();
+        }
+    }
+
+    Visualization:
+
+    Main Thread                          Worker Threads
+    ┌────────────────────────┐          ┌──────────────┐
+    │ worker0.thread.join()  │          │ Worker 0:    │
+    │ WAIT... ───────────────┼─────────→│ Got Terminate
+    │                        │          │ break        │
+    │                        │          │ exit         │
+    │ ✓ (Worker 0 done)      │←─────────│ thread ends  │
+    │                        │          └──────────────┘
+    │ worker1.thread.join()  │          ┌──────────────┐
+    │ WAIT... ───────────────┼─────────→│ Worker 1:    │
+    │                        │          │ Got Terminate│
+    │ ✓ (Worker 1 done)      │←─────────│ exit         │
+    │                        │          └──────────────┘
+    │ (repeat for workers 2,3)          (and so on...)
+    │                        │
+    │ All done! Resources freed
+    └────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════
+COMPLETE LIFECYCLE - ANIMATION
+═══════════════════════════════════════════════════════════════════════════════
+
+TIME 0:00 - Creation
+────────────────────
+
+    Main:  ThreadPool::new(4)
+            │
+            ├─ Create channel (sender ←→ receiver)
+            │
+            ├─ Create Worker 0 → spawn thread 0 (listening)
+            ├─ Create Worker 1 → spawn thread 1 (listening)
+            ├─ Create Worker 2 → spawn thread 2 (listening)
+            └─ Create Worker 3 → spawn thread 3 (listening)
+
+    All 4 workers waiting for messages
+
+
+TIME 0:01 - Job Arrives
+───────────────────────
+
+    Main: pool.execute(job1)
+           │
+           ├─ Box job1
+           └─ sender.send(Message::NewJob(job1))
+                   │
+                   └─→ Receiver (workers listening)
+                        │
+                        └─ Worker 0 wakes up!
+                           ├─ Calls job1
+                           └─ Goes back to listening
+
+
+TIME 0:02 - Multiple Jobs
+──────────────────────────
+
+    Main: pool.execute(job1)  → Worker 0 takes it
+          pool.execute(job2)  → Worker 1 takes it
+          pool.execute(job3)  → Worker 2 takes it
+          pool.execute(job4)  → Worker 3 takes it
+          pool.execute(job5)  → Waits for someone to finish
+                                 ↓
+                                 Job 1 finishes, Worker 0 free
+                                 ↓
+                                 Worker 0 takes job5
+
+
+TIME 1:00 - Shutdown
+────────────────────
+
+    pool goes out of scope
+           │
+           ├─ drop() called
+           │
+           ├─ Send 4 Terminate messages
+           │
+           ├─ Worker 0 ← Terminate → breaks → exits
+           ├─ Worker 1 ← Terminate → breaks → exits
+           ├─ Worker 2 ← Terminate → breaks → exits
+           └─ Worker 3 ← Terminate → breaks → exits
+                │
+                └─ Main waits for each with .join()
+                   │
+                   └─ All done! Resources freed!
+
+
+═══════════════════════════════════════════════════════════════════════════════
+KEY INSIGHT
+═══════════════════════════════════════════════════════════════════════════════
+
+WITHOUT ThreadPool:
+    
+    Request 1 → Spawn Thread 1 → Handle → Destroy
+    Request 2 → Spawn Thread 2 → Handle → Destroy
+    Request 3 → Spawn Thread 3 → Handle → Destroy
+    
+    10 requests = 10 threads created and destroyed ❌
+    Memory expensive!
+
+
+WITH ThreadPool:
+    
+    ThreadPool::new(4) → Create 4 workers ONCE
+    
+    Request 1 → Worker 0 takes it
+    Request 2 → Worker 1 takes it
+    Request 3 → Worker 2 takes it
+    Request 4 → Worker 3 takes it
+    Request 5 → Worker 0 finishes, takes it
+    
+    10 requests = 4 threads used, reused ✅
+    Memory efficient!
+
+
+═══════════════════════════════════════════════════════════════════════════════
+QUICK REFERENCE - WHAT DOES EACH PART DO?
+═══════════════════════════════════════════════════════════════════════════════
+
+FnBox Trait
+│
+├─ Makes FnOnce functions sendable
+└─ Allows them to be boxed
+
+
+Job Type
+│
+├─ A boxed function ready to send
+└─ Can go through channels to workers
+
+
+Worker Struct
+│
+├─ Represents one thread
+├─ Has an ID and a JoinHandle
+└─ When created, spawns a thread that loops
+
+
+ThreadPool Struct
+│
+├─ Manages a collection of workers
+├─ Holds the sender for jobs
+└─ Distributes work to workers
+
+
+Worker::new()
+│
+├─ Creates a new worker
+├─ Spawns a thread for it
+└─ Thread waits for messages (listening)
+
+
+ThreadPool::new()
+│
+├─ Creates the channel
+├─ Creates all workers
+└─ Returns a ThreadPool with sender and workers
+
+
+ThreadPool::execute()
+│
+├─ Takes a function
+├─ Boxes it
+└─ Sends it through channel to waiting workers
+
+
+Drop Implementation
+│
+├─ Sends Terminate to all workers
+├─ Waits for each to finish with join()
+└─ Cleans up everything gracefully
+
+════════════════════════════════════════════════════════════════════════════════

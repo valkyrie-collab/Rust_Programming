@@ -1,0 +1,1 @@
+fn(Data<AppStateWithCounter>) -> impl std::future::Future<Output = String> {index}: HttpServiceFactory

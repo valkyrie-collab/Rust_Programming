@@ -1,0 +1,2 @@
+fn() -> App<actix_web::app_service::AppEntry> {App::<actix_web::app_service::AppEntry>::new}: actix_service::IntoServiceFactory<_, actix_http::requests::request::Request>
+actix_service::IntoServiceFactory<actix_web::app_service::AppInit<T, B>, actix_http::requests::request::Request>

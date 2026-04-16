@@ -1,0 +1,6 @@
+[package]
+name = "replace_element_with_rank"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]

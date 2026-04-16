@@ -1,0 +1,1 @@
+HttpServer<{closure@src/main.rs:13:21: 13:23}, fn() -> App<actix_web::app_service::AppEntry> {App::<actix_web::app_service::AppEntry>::new}, _, _>

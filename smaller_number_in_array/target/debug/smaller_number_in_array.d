@@ -1,0 +1,1 @@
+/home/valkyrie/Documents/Programming/RustProgramming/smaller_number_in_array/target/debug/smaller_number_in_array: /home/valkyrie/Documents/Programming/RustProgramming/smaller_number_in_array/src/main.rs
